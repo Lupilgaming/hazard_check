@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HazardSolving example</title>
+    <style> body {padding: 0; margin: 0;} </style>
+    <script src="haz.js"></script>
+  </head>
+  <body>
+    <input type='text' id = 'idea' />
+    <input type='button' value = 'add to list' id = 'add'>
+    <input type='button' value = 'hazard solve' id = 'hzdo'>
+    <ul id= 'list'> 
+
+
+      <li> <b>Terms</b></li> 
+
+    </ul>
+    <textarea id="answer"></textarea>
+    <hr><hr><hr><hr>
+    <ul id = "answer_list">
+      <li> <b>Solving Terms</b></li> 
+    </ul>
+
+  </body>
+      <script type="text/javascript">
+      list_of_terms = [];
+
+      window.addEventListener('keyup', function(event) {
+        if (event.keyCode === 13) {
+          document.getElementById("add").click();
+        }
+      });
+
+      document.getElementById("add").onclick  = function() {
+
+          var node = document.createElement("Li");
+          var text = document.getElementById("idea").value; 
+          var textnode=document.createTextNode(text);
+          node.appendChild(textnode);
+          document.getElementById("list").appendChild(node);
+          list_of_terms.push(new term(text));
+          document.getElementById("idea").value = "";
+      }
+      
+      document.getElementById("hzdo").onclick  = function(){
+        k = new Kmap(list_of_terms);
+        k.hzsolve();
+        var l = k.hz_solution;
+        for(let i in l){
+          var node = document.createElement("Li");
+          var text = l[i];
+          var textnode=document.createTextNode(text);
+          node.appendChild(textnode);
+          document.getElementById("answer_list").appendChild(node);
+          document.getElementById("answer").value = "Is it correct ?";
+        }
+
+      }
+
+    </script>
+</html>
+
