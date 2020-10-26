@@ -1,6 +1,5 @@
 class term{
-
-  constructor(str){
+	constructor(str){
 		this.n = str.length;
 		this.content = str.toString().valueOf();
 
@@ -81,13 +80,32 @@ class Kmap{
 		let ret, value;
 		[ret, value] = this.is_adjacent(t1, t2);
 		if(ret == 1){
-			this.hz_solution.push(value);
+			this.hz_solution.push(this.val2altval(value));
 			console.log(value);
 		}
 		else {
+			this.hz_solution.push("0");
 			console.log(0);
 		}
 		
+	}
+
+	val2altval(val){
+		var vars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		var ans = "";
+		for(let i in val){
+			if(val[i] == 1){
+				ans = ans + vars[i];
+			}
+			else if(val[i] == 0){
+				ans = ans + vars[i];
+				ans = ans + "'";
+			}
+			else{
+				;
+			}
+		}
+		return ans;
 	}
 }
 /*
