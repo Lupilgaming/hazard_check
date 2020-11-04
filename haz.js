@@ -15,6 +15,8 @@ class Kmap{
 		}
 		this.t_n = this.terms.length;
 		this.hz_solution = [];
+		this.hz_vars = [];
+		this.vars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	}
 
 	hzsolve(){
@@ -45,6 +47,7 @@ class Kmap{
 			else ;
 		}
 		var val = "";
+		var jack = 0;
 		if(sum == 1){
 
 			for(let i = 0; i < n; i++){
@@ -65,23 +68,28 @@ class Kmap{
 			else{
 				if(c1 == c2)
 					val = val + c1;
-				else val = val + '_';
+				else {
+					val = val + '_';
+					// the variable with error
+					jack = i+1;
+				}
 			}
 			}
 
-			return([1, val]);
+			return([jack, val]);
 		}
 		else {
-			return([0, 0]);
+			return([jack, 0]);
 		}
 	}
 
 	generate(t1, t2){
 		let ret, value;
 		[ret, value] = this.is_adjacent(t1, t2);
-		if(ret == 1){
+		if(ret != 0){
 			this.hz_solution.push(this.val2altval(value));
-			console.log(value);
+			this.hz_vars.push(this.vars[ret-1]);
+			console.log(value, this.hz_vars);
 		}
 		else {
 			this.hz_solution.push("0");
