@@ -48,7 +48,7 @@
         var l = k.hz_solution;
         for(let i in l){
           var node = document.createElement("Li");
-          var text = l[i];
+          var text = l[i] + ", here the hazardous variable is " + k.hz_vars[i];
           var textnode=document.createTextNode(text);
           node.appendChild(textnode);
           document.getElementById("answer_list").appendChild(node);
